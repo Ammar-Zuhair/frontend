@@ -12,7 +12,6 @@ interface Student {
   class?: string;
 }
 
-
 export default function StudentManagement() {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,7 +44,6 @@ export default function StudentManagement() {
     setLoading(false);
   }
 };
-
 
   const handleAddStudent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,8 +80,7 @@ export default function StudentManagement() {
   }
 };
 
-
-  const handleDeleteStudent = async (id: number) => {
+  const handleDeleteStudent = async (id: string) => {
     if (!window.confirm('هل أنت متأكد من حذف هذا الطالب؟')) return;
     try {
       const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -167,7 +164,7 @@ export default function StudentManagement() {
                 <button onClick={() => openEditModal(student)} title="تعديل">
                   <Edit2 size={18} />
                 </button>
-                <button onClick={() => handleDeleteStudent(Number(student._id))} title="حذف">
+                <button onClick={() => handleDeleteStudent(student._id)} title="حذف">
                   <Trash2 size={18} />
                 </button>
               </div>
